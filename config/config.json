@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "User_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "jxnimkmtnpxpx34v",
+    "password": "dkeq8w3wigicyjqj",
+    "database": "jawsdb",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
