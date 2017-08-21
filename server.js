@@ -69,9 +69,9 @@ apiRoutes.post('/authenticate', (req,res) =>{
  
  apiRoutes.use((req,res,next) => {
  	var token = req.body.token || req.query.token || req.header['x-access-token'];
- 	 console.log(req.header);
+ 	 console.log(req.header['x-access-token']);
  	 if (token ) {
- 	 	jwt.verify(token, app.get('secret'), function(err) {
+ 	 	jwt.verify(token, app.get('secret'), function(err,decoded) {
  	 		if (err) {
  	 			return res.json({ success: false, message: 'Failed to authenticate token.'})
  	 		}
@@ -85,7 +85,7 @@ apiRoutes.post('/authenticate', (req,res) =>{
  	 	return res.status(403).send({
  	 		success: false,
  	 		message: "No token provided.",
- 	 		reqheader: req.header
+ 	 		reqheader: req.header['x-access-token'],
  	 	});
  	 	}
  	 });
