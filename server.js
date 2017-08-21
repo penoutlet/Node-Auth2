@@ -33,10 +33,6 @@ var db = require("./Models");
 // routes.initialize(app);
 
 // // Home page
-app.get('/', (req,res) => {
-
-	res.send('Hiya. The API is at http://localhost:' + PORT + '/api');
-});
 
 // // setup
 
@@ -44,13 +40,57 @@ app.get('/', (req,res) => {
 // api routes
 var apiRoutes = express.Router();
 
-app.use("/api", apiRoutes);
 
 
 
-apiRoutes.get('/', (req,res)=> {
-	res.render('index')
 
+
+
+apiRoutes.post('/authenticate', (req,res) =>{
+	console.log(req.params)
+
+	db.User.findOne({where: {name: req.body.name, password: req.body.password, email: req.body.email},
+					raw: true
+			
+}).then((response)=> {
+		
+
+		var token = jwt.sign(req.body, app.get("secret"), {
+			
+		});
+
+		res.json({
+			token: token,
+			message: "token granted"
+		});
+	});
+
+});
+ 
+ apiRoutes.use((req,res,next) => {
+ 	var token = req.body.token || req.query.token || req.header['x-access-token'];
+ 	 console.log(req.header);
+ 	 if (token ) {
+ 	 	jwt.verify(token, app.get('secret'), function(err) {
+ 	 		if (err) {
+ 	 			return res.json({ success: false, message: 'Failed to authenticate token.'})
+ 	 		}
+ 	 		else {
+ 	 			req.decoded = decoded;
+ 	 			next();
+ 	 		}
+ 	 	});
+ 	 }
+ 	 else {
+ 	 	return res.status(403).send({
+ 	 		success: false,
+ 	 		message: "No token provided.",
+ 	 		reqheader: req.header
+ 	 	});
+ 	 	}
+ 	 });
+
+ apiRoutes.get('/', (req,res)=> {
 });
 
 apiRoutes.get('/users', (req,res)=> {
@@ -69,31 +109,15 @@ apiRoutes.post("/users", (req,res) =>{
 	res.send('You are now registered.'); 
 });
 
+app.get('/', (req,res) => {
 
-
-
-
-apiRoutes.post('/authenticate', (req,res) =>{
-	console.log(req.params)
-
-	db.User.findOne({where: {name: req.body.name, password: req.body.password, email: req.body.email},
-					raw: true
-			
-}).then((response)=> {
-		
-		
-		var token = jwt.sign(req.body, app.get("secret"), {
-			
-		});
-
-		res.json({
-			token: token,
-			message: "token granted"
-		});
-	});
-
+	res.render('index');
+	
 });
 
+
+
+app.use("/api", apiRoutes);
 		
 db.sequelize.sync({force: false }).then(function() {
 	app.listen(PORT, function() {
