@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 3000;
 var jwt = require('jsonwebtoken');
 var app = express();
 var morgan = require("morgan");
-var bcrypt = require('bcrypt');
+var crypto = require('crypto');
 var methodOverride = require('method-override');
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
@@ -24,52 +24,43 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-// use morgan to log requests to the console
 app.use(morgan('dev'));
 
 var db = require("./Models");
-// require('./routes/api-routes.js')(app);
-// app.use("/", routes);
-// routes.initialize(app);
 
-// // Home page
-
-// // setup
-
-
-// api routes
 var apiRoutes = express.Router();
 
+app.get('/', (req,res) => {
+
+	res.render('index');
+});
 
 
 
 
 
+apiRoutes.post('/users', (req,res) =>{
+	var signed= '';
 
-apiRoutes.post('/authenticate', (req,res) =>{
-	console.log(req.params)
 
-	db.User.findOne({where: {name: req.body.name, password: req.body.password, email: req.body.email},
-					raw: true
-			
-}).then((response)=> {
+	var saltRounds = 10;
 		
-
-		var token = jwt.sign(req.body, app.get("secret"), {
+	db.User
+		.create(req.body)
+		.then((response)=>{
+			var token = 
+			jwt.sign(req.body, app.get("secret"), {});
+			console.log('first token' + token);
+			res.redirect('users?token=' + token);
 			
-		});
-
-		res.json({
-			token: token,
-			message: "token granted"
 		});
 	});
 
-});
+
+			
  
  apiRoutes.use((req,res,next) => {
  	var token = req.body.token || req.query.token || req.header['x-access-token'];
- 	 console.log(req.header['x-access-token']);
  	 if (token ) {
  	 	jwt.verify(token, app.get('secret'), function(err,decoded) {
  	 		if (err) {
@@ -91,30 +82,16 @@ apiRoutes.post('/authenticate', (req,res) =>{
  	 });
 
  apiRoutes.get('/', (req,res)=> {
-});
-
-apiRoutes.get('/users', (req,res)=> {
-	db.User.findAll({}).then((response)=> {
-		res.json(response);
-	});
 
 });
-apiRoutes.post("/users", (req,res) =>{
-	var saltRounds = 10;
-	bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-		db.User.create({ name: req.body.name, password: hash, email: req.body.email})
 
-	});
-
-	res.send('You are now registered.'); 
-});
-
-app.get('/', (req,res) => {
-
-	res.render('index');
-	
-});
-
+ apiRoutes.get('/users',(req,res)=>{
+ 	db.User
+ 		.findAll({})
+ 		.then((users)=>{
+ 		res.render('users', {users});
+ 	});
+ });
 
 
 app.use("/api", apiRoutes);

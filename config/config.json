@@ -1,10 +1,10 @@
 {
-  "development": {
+  "local": {
     "username": "root",
     "password": "root",
     "database": "User_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "Dialect": "mysql"
   },
   "test": {
     "username": "root",

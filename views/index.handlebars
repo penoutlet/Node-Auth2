@@ -1,28 +1,18 @@
-<h2> Add a User </h2>
+<h2> Sign-up! </h2>
 <form class ="create-update-form" action = "api/users" method = 'POST'>
 
 	<div class = 'form-group'>
 		<label for = 'burger'> User: </label>
-		<input type="text" class="form-control" placeholder="Username." id = 'burger' name = 'name'>
-		<input type='text' class='form-control' placeholder='Password.' id = 'user' name = 'password'>
-		<input type='text' class='form-control' placeholder='Email.' id = 'user' name = 'email'>
-		<button type="submit" class="btn btn-info" id = 'add-button'> Add </button>
+		<input type="text" class="form-control" placeholder="Username. (public)" id = 'user' name = 'username'>
+		<input type='text' class='form-control' placeholder='Password (private).' id = 'user' name = 'password'>
+		<input type='text' class='form-control' placeholder='Email (private.' id = 'user' name = 'email'>
+		<input type='text' class='form-control' placeholder='Looking for... (public).' id = 'user' name = 'lookingfor'>
+		
+		<button type="submit" class="btn btn-info" id = 'add-button'> Sign-up </button>
 
 		</div>
 
 	
 </form>
-<form class ="create-update-form" action = "api/authenticate" method = 'POST'>
 
-	<div class = 'form-group'>
-		<label for = 'burger'> User: </label>
-		<input type="text" class="form-control" placeholder="Username." id = 'user' name = 'name'>
-		<input type='text' class='form-control' placeholder='Password.' id = 'user' name = 'password'>
-		<input type='text' class='form-control' placeholder='Email.' id = 'user' name = 'email'>
-		<button type="submit" class="btn btn-info" id = 'add-button'> Sign-in </button>
-
-		</div>
-
-	
-</form>
 
