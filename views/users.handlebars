@@ -4,10 +4,19 @@
 	<ul>
 		<li> Username: {{username}}
 		<li> Looking for: {{lookingfor}}
-		<button id={{lookingfor}}> Start Chat </button>
+		<button id='chat-button'> Start Chat </button>
 	</ul>
 	<hr>
 {{/each}}
-
-
-
+<script type="text/javascript">
+    $('#chat-button').on('click', (function () {
+        $.chat({
+            userId: 1,
+            roomId: 1,
+            typingText: ' is typing...',
+            emptyRoomText: "There's no one around here.",
+            chatJsContentPath: '/basics/chatjs/',
+            adapter: new DemoAdapter()
+        });
+    });
+</script>

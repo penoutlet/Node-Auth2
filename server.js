@@ -4,8 +4,9 @@ var PORT = process.env.PORT || 3000;
 var jwt = require('jsonwebtoken');
 var app = express();
 var morgan = require("morgan");
-var crypto = require('crypto');
+var bcrypt = require("bcrypt");
 var methodOverride = require('method-override');
+var axios = require('axios');
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + "/public"));
@@ -35,7 +36,15 @@ app.get('/', (req,res) => {
 	res.render('index');
 });
 
-
+app.get('/moviesearch', (req,res)=>{
+// res.render('movie_input')
+axios.get('https://www.ombdapi.com/?apikey=2393c630&t=Pokemon', function(err,data){
+  if(err){
+    console.log(err);
+  }
+  res.json(data);
+});
+});
 
 
 
@@ -44,21 +53,25 @@ apiRoutes.post('/users', (req,res) =>{
 
 
 	var saltRounds = 10;
-		
-	db.User
-		.create(req.body)
+		bcrypt.genSalt(saltRounds, (err,salt)=> {
+			bcrypt.hash(req.body.password, salt, (err,hash)=> {
+				db.User
+		.create({username: req.body.username, password: hash, email: req.body.email, lookingfor: req.body.lookingfor})
 		.then((response)=>{
-			var token = 
+
+			var token =
 			jwt.sign(req.body, app.get("secret"), {});
 			console.log('first token' + token);
 			res.redirect('users?token=' + token);
-			
+
+		});
+			});
 		});
 	});
 
 
-			
- 
+
+
  apiRoutes.use((req,res,next) => {
  	var token = req.body.token || req.query.token || req.header['x-access-token'];
  	 if (token ) {
@@ -95,7 +108,7 @@ apiRoutes.post('/users', (req,res) =>{
 
 
 app.use("/api", apiRoutes);
-		
+
 db.sequelize.sync({force: false }).then(function() {
 	app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);

@@ -18,16 +18,20 @@
   },
   "homepage": "https://github.com/penoutlet/Node-Auth2#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
+    "chatjs-commonjs": "^1.0.1",
     "crypto": "^1.0.1",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
+    "js-beautify": "^1.6.14",
     "json-web-token": "^2.1.3",
     "jsonwebtoken": "^7.4.3",
     "method-override": "^2.3.9",
     "morgan": "^1.8.2",
     "mysql2": "^1.4.1",
+    "node-todoist-promise": "0.0.1",
     "sequelize": "^4.7.5"
   }
 }
