@@ -7,6 +7,7 @@ var morgan = require("morgan");
 var bcrypt = require("bcrypt");
 var methodOverride = require('method-override');
 var axios = require('axios');
+var helpers = require('./test/helpers')
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + "/public"));
@@ -35,17 +36,21 @@ app.get('/', (req,res) => {
 
 	res.render('index');
 });
-
+// test
 app.get('/moviesearch', (req,res)=>{
-// res.render('movie_input')
-axios.get('https://www.ombdapi.com/?apikey=2393c630&t=Pokemon', function(err,data){
-  if(err){
-    console.log(err);
-  }
-  res.json(data);
-});
-});
+res.render('movie_input');
 
+});
+// app.post('/movieresults', (req,res)=> {
+// res.send("data");
+// });
+
+app.get('/movieresults', (req,res)=> {
+
+helpers.GetMovie();
+
+  res.render('movie_input');
+});
 
 
 apiRoutes.post('/users', (req,res) =>{
