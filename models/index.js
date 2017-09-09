@@ -11,8 +11,8 @@ var db        = {};
 console.log(config);
 
 var sequelize = new Sequelize(config.staging.username, config.staging.password, {
-host: config.staging.host,
-dialect: 'mysql'
+config.staging.host, config.staging.Dialect)
+
 });
 
 fs

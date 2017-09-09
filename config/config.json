@@ -1,11 +1,11 @@
 {
-  
+
   "staging": {
     "username": "lcoexzqxiwg8u4vf",
     "password": "qsvw6naxspjkh9ez",
     "port": 3306,
     "host": "p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql"
+    "Dialect": "mysql"
   },
   "production": {
     "username": "jxnimkmtnpxpx34v",
