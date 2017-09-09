@@ -6,12 +6,6 @@
     "port": 3306,
     "host": "p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "Dialect": "mysql"
-  },
-  "production": {
-    "username": "jxnimkmtnpxpx34v",
-    "password": "dkeq8w3wigicyjqj",
-    "database": "jawsdb",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
   }
+  
 }
