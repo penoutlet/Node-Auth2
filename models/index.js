@@ -11,7 +11,7 @@ var db        = {};
 console.log(config);
 
 var sequelize = new Sequelize("lcoexzqxiwg8u4vf", "qsvw6naxspjkh9ez", {
-"p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com", "mysql")
+"p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com" "mysql")
 
 });
 
