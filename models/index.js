@@ -10,8 +10,8 @@ var config    = require('./../config/config.json')
 var db        = {};
 console.log(config);
 
-var sequelize = new Sequelize(config.staging.username, config.staging.password, {
-config.staging.host, config.staging.Dialect)
+var sequelize = new Sequelize(config.username, config.password, {
+config.host, config.Dialect)
 
 });
 
