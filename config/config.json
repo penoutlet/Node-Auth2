@@ -4,13 +4,15 @@
     "password": "root",
     "database": "User_db",
     "host": "127.0.0.1",
+    "port":3000,
     "Dialect": "mysql"
   },
-  "test": {
-    "username": "root",
-    "password": "root",
-    "database": "database_test",
-    "host": "127.0.0.1",
+  "staging": {
+    "username": "lcoexzqxiwg8u4vf",
+    "password": "qsvw6naxspjkh9ez",
+    "port": 3306,
+    "database": "User_db",
+    "host": "p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
