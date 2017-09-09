@@ -7,7 +7,8 @@ var morgan = require("morgan");
 var bcrypt = require("bcrypt");
 var methodOverride = require('method-override');
 var axios = require('axios');
-var helpers = require('./test/helpers')
+var helpers = require('./public/utils/helpers');
+// var converse = require('converse');
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + "/public"));
@@ -36,22 +37,36 @@ app.get('/', (req,res) => {
 
 	res.render('index');
 });
-// test
-app.get('/moviesearch', (req,res)=>{
-res.render('movie_input');
-
-});
+// // test
+// app.get('/moviesearch', (req,res)=>{
+// res.render('movie_input');
+//
+// });
 // app.post('/movieresults', (req,res)=> {
 // res.send("data");
 // });
-
+app.get('/moviesearch', (req,res)=>{
+res.render('movie_input');
+});
 app.get('/movieresults', (req,res)=> {
-
-helpers.GetMovie();
-
-  res.render('movie_input');
+ res.render('movie_input')
+// res.render('movie_input', data);
 });
 
+app.post('/movieresults', (req,res)=>{
+
+    axios.get('http://www.omdbapi.com/?apikey=2393c630',{
+      params:  {
+        t: req.body.name
+    }
+  }).then((Data)=>{
+          var data = (Data.data);
+          res.render('movie_input', data)
+          console.log(data);
+
+
+    });
+  });
 
 apiRoutes.post('/users', (req,res) =>{
 	var signed= '';
@@ -109,6 +124,10 @@ apiRoutes.post('/users', (req,res) =>{
  		.then((users)=>{
  		res.render('users', {users});
  	});
+      converse.initialize({
+          bosh_service_url: 'https://bind.conversejs.org', // Please use this connection manager only for testing purposes
+          show_controlbox_by_default: true
+      });
  });
 
 
