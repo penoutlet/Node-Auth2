@@ -5,7 +5,7 @@
     "password": "qsvw6naxspjkh9ez",
     "port": 3306,
     "host": "p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "Dialect": "mysql"
+    "Dialect": "mysql2"
   }
-  
+
 }
