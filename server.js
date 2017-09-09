@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('dev'));
 
-var db = require("./Models");
+var db = require("./models");
 
 var apiRoutes = express.Router();
 
