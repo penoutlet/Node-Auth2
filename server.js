@@ -1,12 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var PORT = process.env.port || 3306;
+var PORT = process.env.port || 3000;
 var jwt = require('jsonwebtoken');
 var app = express();
 var morgan = require("morgan");
 var bcrypt = require("bcrypt");
 var methodOverride = require('method-override');
 var axios = require('axios');
+var mysql = require('mysql')
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + "/public"));

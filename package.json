@@ -32,6 +32,7 @@
     "jsonwebtoken": "^7.4.3",
     "method-override": "^2.3.9",
     "morgan": "^1.8.2",
+    "mysql": "^2.14.1",
     "mysql2": "^1.4.1",
     "node-todoist-promise": "0.0.1",
     "nodemailer": "^4.1.0",

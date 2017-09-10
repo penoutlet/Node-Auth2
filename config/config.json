@@ -1,11 +1,18 @@
 {
 
-  "staging": {
-    "username": "lcoexzqxiwg8u4vf",
-    "password": "qsvw6naxspjkh9ez",
-    "port": 3306,
-    "host": "p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "Dialect": "mysql2"
-  }
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "sambook",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
 
+"production": {
+  "username": "lcoexzqxiwg8u4vf",
+  "password": "qsvw6naxspjkh9ez",
+  "database": "jawsdb",
+  "use_env_variable": "JAWSDB_URL",
+  "dialect": "mysql"
+}
 }

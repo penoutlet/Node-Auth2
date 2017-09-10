@@ -4,14 +4,15 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
-var env       = 'staging';
-var config    = require('./../config/config.json')
-// var config    = require(path.join(__dirname,'..','config', 'config.json'))[env];
+var env       =  process.NODE_ENV || 'development';
+var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
-console.log(config);
 
-var sequelize = new Sequelize("lcoexzqxiwg8u4vf", "qsvw6naxspjkh9ez",
-"p1us8ottbqwio8hv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com","mysql");
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+};
 
 fs
   .readdirSync(__dirname)
