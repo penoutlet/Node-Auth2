@@ -1,6 +1,5 @@
-var sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-	var User = 	sequelize.define("User", { 
+	sequelize.define("User", {
 	username: {
 		type: DataTypes.STRING,
 		allowNull: false,
@@ -18,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
 	lookingfor: {
 		type: DataTypes.STRING,
 		allowNull: false,
-	},
+	}
 	});
-	return User;
 };

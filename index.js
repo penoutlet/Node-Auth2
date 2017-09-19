@@ -5,14 +5,20 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       =  process.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
+var config    = require(__dirname + '/config/config.json')[env];
+var config = require('./config/config.json')
 var db        = {};
 
 if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  console.log('if')
+  var sequelize = new Sequelize(config);
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-};
+  console.log('else')
+  var sequelize = new Sequelize('sambook', 'root', 'root', {
+host: 'localhost',
+dialect: 'mysql'
+});
+  }
 
 fs
   .readdirSync(__dirname)
@@ -25,8 +31,8 @@ fs
   });
 
 Object.keys(db).forEach(function(sambook) {
-  if (db[sambook].associate) {
-    db[sambook].associate(db);
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
   }
 });
 

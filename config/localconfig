@@ -9,3 +9,15 @@
 "username": "lcoexzqxiwg8u4vf",
 "password": "qsvw6naxspjkh9ez",
 "port": 3306,
+
+"development": {
+  "username": "root",
+  "password": "root",
+  "database": "sambook",
+  "host": "127.0.0.1",
+  "dialect": "mysql"
+},
+
+jawsdb credentials
+"username": "lcoexzqxiwg8u4vf",
+"password": "qsvw6naxspjkh9ez",
