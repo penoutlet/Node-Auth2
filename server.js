@@ -7,6 +7,7 @@ var morgan = require("morgan");
 var bcrypt = require("bcrypt");
 var methodOverride = require('method-override');
 var axios = require('axios');
+var helpers = require('./test/helpers')
 app.set('secret', "basdlkfjasfa");
 // // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + "/public"));
@@ -27,7 +28,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('dev'));
 
-var db = require("./Models");
+var db = require("./models");
 
 var apiRoutes = express.Router();
 
