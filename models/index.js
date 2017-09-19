@@ -5,13 +5,15 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       =  process.NODE_ENV || 'development';
-var config    = require(__dirname + '/config/config.json')[env];
-var config = require('./config/config.json')
+// var config    = require(__dirname + './../config/config.json')[env];
+var config = require('./../config/config.json')
+// var User = require('./User')
+
 var db        = {};
 
 if (config.use_env_variable) {
   console.log('if')
-  var sequelize = new Sequelize(config);
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   console.log('else')
   var sequelize = new Sequelize('sambook', 'root', 'root', {
@@ -30,9 +32,9 @@ fs
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(function(sambook) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+Object.keys(db).forEach(function(User) {
+  if (db[User].associate) {
+    db[User].associate(db);
   }
 });
 
